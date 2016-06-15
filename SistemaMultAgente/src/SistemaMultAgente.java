@@ -24,5 +24,7 @@ public class SistemaMultAgente {
     public static void main(String[] args) {
         Ambiente  l = new Ambiente();
         l.ambiente123();
+        //teste
+        
     }
 }
