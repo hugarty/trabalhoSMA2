@@ -10,12 +10,4 @@
  */
 public class Eventos {
     
-    public void animais(Coelho x)
-    {
-        x.
-    }
-    public void animais(Onça x)
-    {
-        
-    }
 }

@@ -23,48 +23,44 @@ Coelho
 */
 
 //cada mês tem 4 semanas/round
+class coelhoLista {
+    int reprodução ;
+    int [] posicao ;
+    int vida;
+    int morteFome;
+    coelhoLista prox;
+}
 public class Coelho {
     
-    //primeiro valor é o tanto de filhotes
-    //segundo é o tempo em semanas que ele demora para nascer
-    static int [] reproducao = {10, 24};
-    //primeiro valor é o tanto de grama que ele come
-    //segundo é o tempo em semanas que ele demora para comer
-    int [] alimentacao  = {1, 1};
-    //O movimento comum é 2 se ele ver uma onça é 4
-    int [] movimento = {2,4};
-    //contador negativo quando chega a zero morre
-    static int vida = 96;
-    //distancia que ele pode enchegar para qualquer lado
-    int rangeVisão = 3;
-    //X e Y do jogador (random de range 50)
-    static int [] posInicial = {0,0};
-    //if morte == 0 o cara morre;
-    static int mortePorFome = 4;
-    
-    static int quantidade = 0;
-    
-    public Coelho ()
-    {
-        quantidade = 1;
-    }
-    public void round ()
-    {
-        reproducao[1] --;
-        templanta();
-        movimenta();// colocar a fuga do predador e a caça ao mato
-        vida --;
-        if(mortePorFome == 0){
-            quantidade --;
-        }
-    }
-
-    private void templanta() {
-        
-        Ambiente.comerPlanta();
-    }
-
-    private void movimenta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    //primeiro valor é o tanto de filhotes
+//    //segundo é o tempo em semanas que ele demora para nascer
+//    int [] reproducao = {10, 24};
+//    //primeiro valor é o tanto de grama que ele come
+//    //segundo é o tempo em semanas que ele demora para comer
+//    int [] alimentacao  = {1, 1};
+//    //O movimento comum é 2 se ele ver uma onça é 4
+//    int [] movimento = {2,4};
+//    //contador negativo quando chega a zero morre
+//    static int vida = 96;
+//    //distancia que ele pode enchegar para qualquer lado
+//    int rangeVisão = 3;
+//    //X e Y do jogador (random de range 50)
+//    static int [] posInicial = {0,0};
+//    //if morte == 0 o cara morre;
+//    static int mortePorFome = 4;
+//    
+//    static int quantidade = 0;
+//    
+   coelhoLista primeiro, ultimo;
+   int tamanho;
+   
+   public void verifica ()
+   {
+       int aux = tamanho;
+       while(aux != 0 )
+       {
+           
+           aux --;
+       }
+   }
 }
