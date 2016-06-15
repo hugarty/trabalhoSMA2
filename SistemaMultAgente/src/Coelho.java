@@ -1,0 +1,45 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Hugarty
+ */
+
+/*
+Coelho
+ Reprodução: 10 filhotes a cada 6 meses
+ Alimentação: 1 planta por semana
+ Movimentação: 2 passos aleatórios, caso encontre onça próxima anda 4
+ passos
+ Tempo de vida: 2 anos
+ Posição inicial: aleatória
+ Morte por fome: 1 mês
+ Objetivo: sobreviver e reproduzir
+ Estratégia: buscar plantas e fugir da onça
+*/
+
+//cada mês tem 4 semanas
+public class Coelho {
+    //Discernir um animal do outro
+    String animal = "Coelho";
+    //primeiro valor é o tanto de filhotes
+    //segundo é o tempo em semanas que ele demora para nascer
+    int [] reproducao = {10, 24};
+    //primeiro valor é o tanto de grama que ele come
+    //segundo é o tempo em semanas que ele demora para comer
+    int [] alimentacao  = {1, 1};
+    //O movimento comum é 2 se ele ver uma onça é 4
+    int [] movimento = {2,4};
+    //contador negativo quando chega a zero morre
+    int vida = 96;
+    //distancia que ele pode enchegar para qualquer lado
+    int rangeVisão = 3;
+    //X e Y do jogador (random de range 50)
+    int [] posInicial = {0,0};
+    //if morte == 0 o cara morre;
+    int mortePorFome = 4;
+}
