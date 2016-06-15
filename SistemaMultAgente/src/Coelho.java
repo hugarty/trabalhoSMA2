@@ -23,15 +23,19 @@ Coelho
 */
 
 //cada mês tem 4 semanas/round
-class coelhoLista {
+
+public class Coelho {
     int reprodução ;
-    int [] posicao ;
+    
     int vida;
     int morteFome;
-    coelhoLista prox;
-}
-public class Coelho {
+    Coelho prox;
+    int quantidade;
     
+        Coelho () {
+            this.prox =null;
+}
+        int tamanho;
 //    //primeiro valor é o tanto de filhotes
 //    //segundo é o tempo em semanas que ele demora para nascer
 //    int [] reproducao = {10, 24};
@@ -51,8 +55,6 @@ public class Coelho {
 //    
 //    static int quantidade = 0;
 //    
-   coelhoLista primeiro, ultimo;
-   int tamanho;
    
    public void verifica ()
    {

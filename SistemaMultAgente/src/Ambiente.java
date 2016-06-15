@@ -19,6 +19,7 @@
 //cada mês tem 4 semanas 
 public class Ambiente {
     static int planta = 123;
+    
     public Ambiente (){
     }
     

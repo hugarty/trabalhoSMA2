@@ -23,7 +23,13 @@ passos em direção ao coelho
 */
 
 //cada mês tem 4 semanas
-public class Onça {
+public class Onca {
+    Onca prox;
+    
+    Onca(){
+        this.prox=null;
+        
+    }
     //Discernir um animal do outro
     String animal = "Onça";
     //primeiro valor é o tanto de filhotes

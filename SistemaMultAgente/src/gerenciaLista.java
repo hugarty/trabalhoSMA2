@@ -8,6 +8,9 @@
  *
  * @author Hugarty
  */
-public class Eventos {
+public class gerenciaLista {
+   Coelho primeiroCoelho;
+   Onca primeiroOnca;
     
+   
 }
