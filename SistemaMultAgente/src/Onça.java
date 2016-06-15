@@ -42,4 +42,5 @@ public class Onça {
     int [] posInicial = {0,0};
     //if morte == 0 o cara morre;
     int mortePorFome = 12;
+    
 }

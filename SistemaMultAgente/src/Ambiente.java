@@ -18,6 +18,13 @@
  */
 //cada mês tem 4 semanas 
 public class Ambiente {
+    static int planta = 123;
+    public Ambiente (){
+    }
+    
+    static void comerPlanta() {
+        planta --;
+    }
 
     String ambiente[][] = new String[50][50];
 
