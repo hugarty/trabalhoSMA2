@@ -32,10 +32,9 @@ public class Onca {
     int vida = 384;
     
     String animal = "Onça";
-    Onca(int x, int y){
+    Onca(){
         this.prox=null;
-        this.x = x;
-        this.y = y;
+       
         
     }
     //Discernir um animal do outro

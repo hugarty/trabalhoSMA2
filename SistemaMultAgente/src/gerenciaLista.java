@@ -50,7 +50,7 @@ public class gerenciaLista {
             //ENQUANTO NOSSO ELEMENTO DE INDEX X E Y GERADO, CONTIVER ALGO Q N SEJA '-', GERA NOVO INDEX X E Y
             while (v==false) {
                 if(amb.getElementFromIndex(rngx, rngy) != '-'){
-                System.out.println(amb.getElementFromIndex(rngx, rngy));
+              
               
                 rngx = rngX.nextInt(50);
                 rngy = rngY.nextInt(50);
@@ -68,17 +68,6 @@ public class gerenciaLista {
           // amb.imprimiTabuleiro();
         nCoelhos++;
            
-        }
-        void printa_Tabuleiro(){
-            //Ambiente ambi =amb; 
-            char[][] matriz= amb.getMatriz();
-            
-            for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz.length; j++) {
-                System.out.printf("%c ", matriz[i][j]);
-            }
-            System.out.println("");
-        }
         }
         
         //ISSO AKI É PRA TESTA SE A LISTA TA ENCADEANDO MESMO. (DE COELHOS)
@@ -104,8 +93,37 @@ public class gerenciaLista {
         } else {
             ultimoOnca.prox = novaOnca;
         }
-        nOncas++;
+        
         ultimoOnca = novaOnca;
+        
+        Random rngX = new Random();
+            Random rngY = new Random();
+            //GERA INDEX X E Y, PRA INSERIR NA MATRIZ
+            int rngx = rngX.nextInt(50);
+            int rngy = rngY.nextInt(50);
+           
+            boolean v = false;
+            
+            //ENQUANTO NOSSO ELEMENTO DE INDEX X E Y GERADO, CONTIVER ALGO Q N SEJA '-', GERA NOVO INDEX X E Y
+            while (v==false) {
+                if(amb.getElementFromIndex(rngx, rngy) != '-'){
+              
+              
+                rngx = rngX.nextInt(50);
+                rngy = rngY.nextInt(50);
+                    
+                }else{
+                    v=true;
+                }
+            }
+            
+            //CADA INSERIDA O ULTIMOCOELHO VAI SETANDO SEU ATRIBUTO DE POSIÇAO
+            ultimoOnca.setPos(rngx, rngy);
+            
+            //SETA ESSE COELHO INSERIDO NA MATRIZ 
+            amb.setElement('O', ultimoOnca.getX(), ultimoOnca.getY());
+          // amb.imprimiTabuleiro();
+        nOncas++;
     }
 
         
@@ -159,19 +177,16 @@ public class gerenciaLista {
 
     }
 
-  
+  }
 
-    void imprimiTest() {
-        Coelho temp = primeiroCoelho;
-        while (temp != null) {
-            System.out.println(temp.getX() + " " + temp.getY());
-            temp = temp.prox;
-        }
-
-        Onca tempo = primeiroOnca;
-        while (tempo != null) {
-            System.out.println(tempo.getX() + " " + tempo.getY());
-            tempo = tempo.prox;
-        }
-    }
-}
+//        void printa_Tabuleiro(){
+//            //Ambiente ambi =amb; 
+//            char[][] matriz= amb.getMatriz();
+//            
+//            for (int i = 0; i < matriz.length; i++) {
+//            for (int j = 0; j < matriz.length; j++) {
+//                System.out.printf("%c ", matriz[i][j]);
+//            }
+//            System.out.println("");
+//        }
+//        }

@@ -24,7 +24,8 @@ public class Ambiente {
     public int qtdCoelhos = 40;
 //    static int planta = 123;
    public char ambiente[][] = new char[50][50];
-
+   public int qtdOncas = 8;
+    gerenciaLista L;
 //    static void comerPlanta() {
 //        planta--;
 //    }
@@ -33,44 +34,63 @@ public class Ambiente {
        
     }
    public  void iniciar_ambiente() {
-        for (int x = 0; x < this.ambiente.length; x++) {
-            for (int y = 0; y < this.ambiente.length; y++) {
-                this.ambiente[x][y] = '-';
+        for (int x = 0; x < ambiente.length; x++) {
+            for (int y = 0; y < ambiente.length; y++) {
+                ambiente[x][y] = '-';
             }
+            
+        }
+     
+        for (int x = 0; x < 45; x++) {
+            for (int y = 0; y < 50; y++) {
+                ambiente[x][y] = 'x';
+            }
+            
         }
     }
    public void start(){
-   //iniciar_populacao(); 
+       L = new gerenciaLista();
        adicionarCoelhos();
-//       setElement('C', 0, 0);
+       adicionarOnca();
+       L.amb.imprimiTabuleiro();
        // imprimiTabuleiro();
    }
     public void adicionarCoelhos() {
-        
-       gerenciaLista L = new gerenciaLista();
-      
-        
+       
         int cont = 0;
-        //INSERE 40 COELHO
+       // INSERE 40 COELHO
         while (cont < qtdCoelhos) {
             L.insereCoelho(new Coelho());
             cont++;
        }
-        L.printaLista();
-        L.removeCoelho(L.primeiroCoelho.prox.getX(), L.primeiroCoelho.prox.getY());
-       // L.printa_Tabuleiro();
-        L.printaLista();
-        System.out.println("\nNumero de coelhos: " + L.nCoelhos);
+       
+
+       System.out.println("\nNumero de coelhos: " + L.nCoelhos);
     }
     
-//    public void imprimiTabuleiro() {
-//        for (int i = 0; i < this.ambiente.length; i++) {
-//            for (int j = 0; j < this.ambiente.length; j++) {
-//                System.out.printf("%c ", this.ambiente[i][j]);
-//            }
-//            System.out.println("");
-//        }
-//    }
+    public void adicionarOnca() {
+      
+        int cont = 0;
+       // INSERE 8 COELHO
+        while (cont < qtdOncas) {
+            L.insereOnca(new Onca());
+            cont++;
+       }
+        
+System.out.println("\nNumero de oncas: " + L.nOncas);
+
+       
+    }
+    
+    public void imprimiTabuleiro() {
+        for (int i = 0; i < this.ambiente.length; i++) {
+            for (int j = 0; j < this.ambiente.length; j++) {
+                System.out.printf("%c ", this.ambiente[i][j]);
+            }
+            System.out.println("");
+        }
+   
+    }
     
     //RETORNA MATRIZ
     public char[][] getMatriz(){
