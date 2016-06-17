@@ -23,8 +23,14 @@ public class SistemaMultAgente {
 
     public static void main(String[] args) {
         Ambiente  l = new Ambiente();
-        l.ambiente123();
-        //teste
+        l.start();
+        
+//        gerenciaLista N = new gerenciaLista();
+//        N.insereCoelho(new Coelho());
+//        N.insereOnca(new Onca());
+//        
+//        N.imprimiTest();
+        
         
     }
 }

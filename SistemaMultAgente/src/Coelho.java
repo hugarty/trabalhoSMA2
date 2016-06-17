@@ -25,17 +25,18 @@ Coelho
 //cada mês tem 4 semanas/round
 
 public class Coelho {
-    int reprodução ;
-    
+    String animal ="Coelho";
+    int reproducao ;
+    int x;
+    int y;
     int vida;
-    int morteFome;
+    int fome;
     Coelho prox;
-    int quantidade;
     
         Coelho () {
+          
             this.prox =null;
 }
-        int tamanho;
 //    //primeiro valor é o tanto de filhotes
 //    //segundo é o tempo em semanas que ele demora para nascer
 //    int [] reproducao = {10, 24};
@@ -56,13 +57,14 @@ public class Coelho {
 //    static int quantidade = 0;
 //    
    
-   public void verifica ()
-   {
-       int aux = tamanho;
-       while(aux != 0 )
-       {
-           
-           aux --;
-       }
+   public void setPos(int xC, int yC){
+       this.x = xC;
+       this.y = yC;
    }
+   public int getY(){
+        return this.y;
+    }
+  public  int getX(){
+        return this.x;
+    }
 }
