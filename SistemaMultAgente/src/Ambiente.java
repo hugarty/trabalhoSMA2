@@ -61,20 +61,34 @@ public class Ambiente {
         
         this.anos = anos * 48;
         int cont =0;
-        //while(cont < anos){
+        while(cont < anos){
             L.amb.imprimiTabuleiro();
             //L.verificaStatus(L.getPrimeiroCueio());
             //L.verificaStatus(L.getPrimeiraOnca());
-            L.movimentaCueio(L.getPrimeiroCueio());
-            L.movimentaOnca(L.getPrimeiraOnca());
+//            L.movimentaCueio(L.getPrimeiroCueio());
+//            L.movimentaOnca(L.getPrimeiraOnca());
             System.out.println("");
             L.amb.imprimiTabuleiro();
-          //  cont++;
-        //}
+            System.out.println("QTD DE PLANTA PPEWRA: "+L.nPlantas);
+            cont++;
+            reproduzPlantas();
+            System.out.println("Numero de coelhos: "+L.nCoelhos);
+            System.out.println("Numero de oncas: "+L.nOncas);
+            
+        }
             
         
    }
    
+   void reproduzPlantas(){
+       int plantas_filho = (int)(L.nPlantas*0.1);
+       int cont = 0;
+       while (cont < plantas_filho){
+           L.inserePlanta(new Planta());
+           cont++;
+       }
+       
+   }
    public void adicionarPlantas(){
        int cont = 0 ;
        
@@ -83,7 +97,7 @@ public class Ambiente {
            L.inserePlanta(new Planta());
            cont++;
        }
-       nPlantas = L.nPlantas;
+      
        
        
    }
