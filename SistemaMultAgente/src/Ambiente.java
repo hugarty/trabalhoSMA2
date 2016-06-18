@@ -21,7 +21,7 @@ import java.util.Random;
 //cada mês tem 4 semanas 
 public class Ambiente {
 
-    int anos = 4;
+    int anos = 1;
     
     public int qtdCoelhosInicial = 40;
     public char ambiente[][] = new char[50][50];
@@ -53,33 +53,35 @@ public class Ambiente {
 //            
         //}
     }
-   public void start() {
+
+    public void start() {
         L = new gerenciaLista();
         adicionarCoelhos();
         adicionarOnca();
         adicionarPlantas();
-        
+
         this.anos = anos * 48;
-        int cont =0;
-        while(cont < anos){
-            System.out.println("QTD DE PLANTA PPEWRA: "+L.nPlantas);
-            System.out.println("Numero de coelhos: "+L.nCoelhos);
-            System.out.println("Numero de oncas: "+L.nOncas);
-           L.amb.imprimiTabuleiro();
-           
+        int cont = 0;
+        while (cont < anos) {
+            System.out.println("QTD DE PLANTA PPEWRA: " + L.nPlantas);
+            System.out.println("Numero de coelhos: " + L.nCoelhos);
+            System.out.println("Numero de oncas: " + L.nOncas);
+            L.amb.imprimiTabuleiro();
+            L.loading();
+            
             L.verificaStatusOnca();
             L.movimentaOnca();
-            
+
             L.verificaStatusCoelho();
             L.movimentaCueio();
-            
+            System.out.println("Fome Cu: "+L.getPrimeiroCueio().fome);
             System.out.println("");
             //L.amb.imprimiTabuleiro();
             cont++;
             reproduzPlantas();
-            
+
         }
-            
+
         
    }
    

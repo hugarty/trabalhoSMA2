@@ -160,12 +160,6 @@ public class gerenciaLista {
             amb.setElement('-', primeiroCoelho.x, primeiroCoelho.y);
             primeiroCoelho = primeiroCoelho.prox;
         } else {
-
-                //SE FOR O HEAD A SER REMOVIDO, JA FOI DEFINIDO NO IF DE CIMA. AGORA SE NAO É O HEAD PODE SER DA SEGUNDO À ULTIMA LISTA.
-            //ENTAO ENQUANTO O TEMP.PROX(Q NO CASO É A SEGUNDA LISTA SE PARTIRMOS Q AINDA ESTAMOS NA PRIMEIRA) FOR DIFERENTE DE NULA.
-            //DAI, SE ESSA SEGUNDA LISTA FOR A Q VAI SER REMOVIDA, O Q VAI ACONTECER?
-            //O TEMP.PROX VAI PASSAR A APONTAR PARA PARA A PRÓXIMA DA PRÓXIMA DA LISTA 
-            // https://postimg.org/image/g10rkqyk6/
             while (temp.prox != null) {
                 if (temp.prox == coe) {
                     amb.setElement('-', temp.prox.x, temp.prox.y);
@@ -197,7 +191,6 @@ public class gerenciaLista {
                     temp = temp.prox;
                 }
             }
-
         }
        nOncas--;
     }
@@ -228,7 +221,6 @@ public class gerenciaLista {
         Onca x = primeiroOnca;
         while(x != null){
             amb.setElement('-', x.getX(), x.getY());
-            System.out.println("O Antes - X: "+x.getX()+" - Y: "+x.getY());
             visao = visaoOnca(x);
             int cont = 0;
             //Se tiver algum coelho na area de visão dele
@@ -282,8 +274,7 @@ public class gerenciaLista {
                 
                 amb.setElement('O', visao[0], visao[1]);
             }
-            System.out.println("O Depois - X: "+x.getX()+" - Y: "+x.getY());
-            System.out.println("---------------------");
+            System.out.print("|");
             x = x.prox;
         }
     }
@@ -330,7 +321,6 @@ public class gerenciaLista {
         Coelho x = primeiroCoelho;
         while(x != null){
             amb.setElement('-', x.getX(), x.getY());
-            System.out.println("C Antes - X: "+x.getX()+" - Y: "+x.getY());
             visao = visaoCueio(x);
             int cont = 0;
             //Se tiver algum coelho na area de visão dele
@@ -384,8 +374,7 @@ public class gerenciaLista {
                 
                 amb.setElement('C', visao[0], visao[1]);
             }
-            System.out.println("C Depois - X: "+x.getX()+" - Y: "+x.getY());
-            System.out.println("---------------------");
+            System.out.print("|");
             x = x.prox;
         }
     }
@@ -520,6 +509,8 @@ public class gerenciaLista {
                 x.reproducao --;
             }
             
+            //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
+            plantaEmpanada(x);
             if(x.vida == 0 || x.fome ==0)
             {
                 removeCoelho(x);
@@ -529,27 +520,6 @@ public class gerenciaLista {
                 x.vida --;
                 x.fome --;
             }
-            
-            /*
-            CRIA METODO PRA COMIDA DOS CUELHO QUE RESETA A 
-            FOME PARA O MAXIMO QUANDO ELE COME UMA PLANTA
-            
-            COLOCAR ELE AQUI
-            ..
-            ..
-            COLOCAR ELE AQUI
-            */
-            
-//            if(x.fome == 0)
-//            {
-//                removeCoelho(x.x, x.y);
-//                //ELIMINAR O COELHO
-//                //ELIMINAR O COELHO
-//                //ELIMINAR O COELHO
-//            }else
-//            {
-//                x.fome --;
-//            }
             
             x = x.prox;
         }
@@ -571,12 +541,9 @@ public class gerenciaLista {
             //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
            coelhoEmpanado(x);
             
-            
            if(x.vida == 0 || x.fome ==0)
             {
                 removeOnca(x);
-                //Elimina coelho
-                //Elimina coelho
             }else{
                 x.vida --;
                 x.fome --;
@@ -584,6 +551,10 @@ public class gerenciaLista {
             
             x = x.prox;
         }
+    }
+    public Planta getPrimeiraPlanta()
+    {
+        return primeiroGrama;
     }
     public Coelho getPrimeiroCueio() {
         return primeiroCoelho;
@@ -629,10 +600,7 @@ public class gerenciaLista {
             insereOnca(new Onca());
            i++;
         }
-        // INSERIR 2 FILHOTES
-        // INSERIR 2 FILHOTES
-        // INSERIR 2 FILHOTES
-        // INSERIR 2 FILHOTES
+        
     }
 
     private void coelhoEmpanado(Onca x) {
@@ -649,6 +617,28 @@ public class gerenciaLista {
         }
     }
 
+    private void plantaEmpanada(Coelho x) {
+    Planta temp = getPrimeiraPlanta();
+        while(temp != null)
+        {
+            if((x.x == temp.x) && (x.y ==temp.y)){
+                removePlanta(temp.x, temp.y);
+                x.fome = 4;
+                break;
+            }
+            temp = temp.prox;
+        }
+    }
+
+    void loading() {
+        System.out.println("loading...");
+        for(int i = 0; i <nCoelhos + nOncas ; i ++)
+        {
+            System.out.print("|");
+        }
+        System.out.println("");
+    }
+    
    
 
     
