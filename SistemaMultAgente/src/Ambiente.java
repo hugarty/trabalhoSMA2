@@ -38,22 +38,25 @@ public class Ambiente {
             for (int y = 0; y < ambiente.length; y++) {
                 ambiente[x][y] = '-';
             }
-            
+           
         }
      
-        for (int x = 0; x < 45; x++) {
-            for (int y = 0; y < 50; y++) {
-                ambiente[x][y] = 'x';
-            }
-            
-        }
+//        for (int x = 0; x < 45; x++) {
+//            for (int y = 0; y < 50; y++) {
+//                ambiente[x][y] = 'x';
+//            }
+//            
+        //}
     }
-   public void start(){
-       L = new gerenciaLista();
-       adicionarCoelhos();
-       adicionarOnca();
-       L.amb.imprimiTabuleiro();
-       // imprimiTabuleiro();
+   public void start() {
+        L = new gerenciaLista();
+        adicionarCoelhos();
+        adicionarOnca();
+        L.amb.imprimiTabuleiro();
+        L.movimentaOnca(L.getPrimeiraOnca());
+        System.out.println("");
+        L.amb.imprimiTabuleiro();
+        // imprimiTabuleiro();
    }
     public void adicionarCoelhos() {
        
@@ -84,9 +87,17 @@ System.out.println("\nNumero de oncas: " + L.nOncas);
     
     public void imprimiTabuleiro() {
         for (int i = 0; i < this.ambiente.length; i++) {
+            if( i< 10){
+                System.out.print("0"+i+" ");
+            }else
+                System.out.print(i+" ");
+        }
+        System.out.println("");
+        for (int i = 0; i < this.ambiente.length; i++) {
             for (int j = 0; j < this.ambiente.length; j++) {
-                System.out.printf("%c ", this.ambiente[i][j]);
-            }
+                System.out.printf(" %c ", this.ambiente[i][j]);
+            } 
+            System.out.print("  "+i);
             System.out.println("");
         }
    

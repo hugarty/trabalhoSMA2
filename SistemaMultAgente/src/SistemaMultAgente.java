@@ -1,3 +1,6 @@
+
+import java.util.Random;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,8 +25,12 @@ As simulações a serem registradas são:
 public class SistemaMultAgente {
 
     public static void main(String[] args) {
+      
+            
+        
         Ambiente  l = new Ambiente();
         l.start();
+        
         
 //        gerenciaLista N = new gerenciaLista();
 //        N.insereCoelho(new Coelho());
