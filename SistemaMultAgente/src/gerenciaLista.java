@@ -567,16 +567,9 @@ public class gerenciaLista {
             {
                 x.reproducao --;
             }
-            if(x.vida == 0)
-            {
-              //  removeOnca(x);
-                //Elimina onca
-                //Elimina onca
-            }else{
-                x.vida --;
-            }
+            
             //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
-           // coelhoEmpanado(x);
+           coelhoEmpanado(x);
             
             
            if(x.vida == 0 || x.fome ==0)
@@ -647,7 +640,7 @@ public class gerenciaLista {
         while(temp != null)
         {
             if((x.x == temp.x) && (x.y ==temp.y)){
-                //removeCoelho(temp.x, temp.y);
+                removeCoelho(temp);
                 
                 x.fome = 12;
                 break;
