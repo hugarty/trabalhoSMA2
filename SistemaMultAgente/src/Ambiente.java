@@ -20,16 +20,19 @@ import java.util.Random;
  */
 //cada mês tem 4 semanas 
 public class Ambiente {
-  
+
+    int anos = 4;
+    
     public int qtdCoelhos = 40;
 //    static int planta = 123;
-   public char ambiente[][] = new char[50][50];
-   public int qtdOncas = 8;
+    public char ambiente[][] = new char[50][50];
+    public int qtdOncas = 8;
     gerenciaLista L;
 //    static void comerPlanta() {
 //        planta--;
 //    }
-   public  Ambiente(){
+
+    public Ambiente() {
        iniciar_ambiente();
        
     }
@@ -52,11 +55,17 @@ public class Ambiente {
         L = new gerenciaLista();
         adicionarCoelhos();
         adicionarOnca();
-        L.amb.imprimiTabuleiro();
-        L.movimentaCueio(L.getPrimeiraCueio());
-        //L.movimentaOnca(L.getPrimeiraOnca());
-        System.out.println("");
-        L.amb.imprimiTabuleiro();
+        this.anos = anos * 48;
+        while(anos !=0){
+            L.amb.imprimiTabuleiro();
+            //L.verificaStatus(L.getPrimeiroCueio());
+            //L.verificaStatus(L.getPrimeiraOnca());
+            L.movimentaCueio(L.getPrimeiroCueio());
+            L.movimentaOnca(L.getPrimeiraOnca());
+            System.out.println("");
+            L.amb.imprimiTabuleiro();
+        }
+            
         // imprimiTabuleiro();
    }
     public void adicionarCoelhos() {
@@ -93,7 +102,7 @@ System.out.println("\nNumero de oncas: " + L.nOncas);
             }else
                 System.out.print(i+" ");
         }
-        System.out.println("");
+        System.out.println("Y X");
         for (int i = 0; i < this.ambiente.length; i++) {
             for (int j = 0; j < this.ambiente.length; j++) {
                 System.out.printf(" %c ", this.ambiente[i][j]);

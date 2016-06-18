@@ -189,7 +189,7 @@ public class gerenciaLista {
         int[] visao;
         while(x != null){
             amb.setElement('-', x.getX(), x.getY());
-            System.out.println("Antes - X: "+x.getX()+" - Y: "+x.getY());
+            System.out.println("O Antes - X: "+x.getX()+" - Y: "+x.getY());
             visao = visaoOnca(x);
             int cont = 0;
             //Se tiver algum coelho na area de visão dele
@@ -243,7 +243,7 @@ public class gerenciaLista {
                 
                 amb.setElement('O', visao[0], visao[1]);
             }
-            System.out.println("Depois - X: "+x.getX()+" - Y: "+x.getY());
+            System.out.println("O Depois - X: "+x.getX()+" - Y: "+x.getY());
             System.out.println("---------------------");
             x = x.prox;
         }
@@ -260,16 +260,16 @@ public class gerenciaLista {
         int auxY10 = 6;
         int auxY20 = 6;
         if (X - 6 < 0) {
-            auxX1 = verificaZero(X, auxX1);
+            auxX1 = verificaNegativa(X, auxX1);
         }
         if (Y - 6 < 0) {
-            auxY10 = verificaZero(Y, auxY10);
+            auxY10 = verificaNegativa(Y, auxY10);
         }
         if (X + 6 > 49) {
-            auxX2 = verificaQn(X, auxX2);
+            auxX2 = verificaPositiva(X, auxX2);
         }
         if (Y + 6 > 49) {
-            auxY20 = verificaQn(Y, auxY20);
+            auxY20 = verificaPositiva(Y, auxY20);
         }
         for (int i = (X - auxX1); i <= (X + auxX2); i++) {
             for(int j = (Y - auxY10); j <= (Y + auxY20); j++)
@@ -290,7 +290,7 @@ public class gerenciaLista {
         int[] visao;
         while(x != null){
             amb.setElement('-', x.getX(), x.getY());
-            System.out.println("Antes - X: "+x.getX()+" - Y: "+x.getY());
+            System.out.println("C Antes - X: "+x.getX()+" - Y: "+x.getY());
             visao = visaoCueio(x);
             int cont = 0;
             //Se tiver algum coelho na area de visão dele
@@ -344,73 +344,59 @@ public class gerenciaLista {
                 
                 amb.setElement('C', visao[0], visao[1]);
             }
-            System.out.println("Depois - X: "+x.getX()+" - Y: "+x.getY());
+            System.out.println("C Depois - X: "+x.getX()+" - Y: "+x.getY());
             System.out.println("---------------------");
             x = x.prox;
         }
     }
     
+    
     private int[] visaoCueio(Coelho x) {
         int[] fugir = new int [2];
         int X = x.getX();
         int Y = x.getY();
-        int auxX1 = 4;
-        int auxX2 = 4;
-        int auxY10 = 4;
-        int auxY20 = 4;
+        int auxXnegativa = 4;
+        int auxXpositiva = 4;
+        int auxYnegativa = 4;
+        int auxYpositiva = 4;
         if (X - 4 < 0) {
-            auxX1 = verificaZero(X, auxX1);
+            auxXnegativa = verificaNegativa(X, auxXnegativa);
         }
         if (Y - 4 < 0) {
-            auxY10 = verificaZero(Y, auxY10);
+            auxYnegativa = verificaNegativa(Y, auxYnegativa);
         }
         if (X + 4 > 49) {
-            auxX2 = verificaQn(X, auxX2);
+            auxXpositiva = verificaPositiva(X, auxXpositiva);
         }
         if (Y + 4 > 49) {
-            auxY20 = verificaQn(Y, auxY20);
+            auxYpositiva = verificaPositiva(Y, auxYpositiva);
         }
-        for (int i = (X - auxX1); i <= (X + auxX2); i++) {
-            for(int j = (Y - auxY10); j <= (Y + auxY20); j++)
+        for (int i = (X - auxXnegativa); i <= (X + auxXpositiva); i++) {
+            for(int j = (Y - auxYnegativa); j <= (Y + auxYpositiva); j++)
             {
                 if(amb.ambiente [i][j] =='O')
                 {
                     if(X < i)
                     {
+                        
                         if (Y < j) {
                             //Essa subtração aqui é pra fugir dus animal
-                            X = X - 4;
-                            Y = Y - 4;
-                            if (X < 0) {
-                                X= verificaZero(X, auxX1);
-                            }
-                            if (Y < 0) {
-                                Y = verificaZero(Y, auxY10);
-                            }
+                            X = X - auxXnegativa;
+                            Y = Y - auxYnegativa;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
                         }else
                         if(Y >= j)
                         {
-                            X = X - 4;
-                            Y = Y + 4;
-                            if (X < 0) {
-                                X= verificaZero(X, auxX1);
-                            }
-                            if (Y > 49) {
-                                Y = verificaQn(Y, auxY10);
-                            }
+                            X = X - auxXnegativa;
+                            Y = Y + auxYpositiva;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
                         }else
                         {
-                            
-                            X = X - 4;
-                            if (X < 0) {
-                                X = verificaZero(X, auxX1);
-                            }
+                            X = X - auxXnegativa;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
@@ -420,37 +406,22 @@ public class gerenciaLista {
                     {
                         if(Y < j){
                             //Essa subtração aqui é pra 
-                            X = X + 4;
-                            Y = Y - 4;
-                            if (X > 49) {
-                                X= verificaQn(X, auxX1);
-                            }
-                            if (Y < 0) {
-                                Y = verificaZero(Y, auxY10);
-                            }
+                            X = X + auxXpositiva;
+                            Y = Y - auxYnegativa;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
                         }else
                         if(Y > j)
                         {
-                            X = X + 4;
-                            Y = Y + 4;
-                            if (X > 49) {
-                                X= verificaQn(X, auxX1);
-                            }
-                            if (Y > 49) {
-                                Y = verificaQn(Y, auxY10);
-                            }
+                            X = X + auxXpositiva;
+                            Y = Y + auxYpositiva;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
                         }else
                         {
-                            X = X + 4;
-                            if (X > 49) {
-                                X= verificaQn(X, auxX1);
-                            }
+                            X = X + auxXpositiva;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
@@ -458,39 +429,34 @@ public class gerenciaLista {
                     }else
                     {
                         if(Y < j){
-                            Y = Y - 4;
-                            if (Y < 0) {
-                                Y = verificaZero(Y, auxY10);
-                            }
+                            Y = Y - auxYnegativa;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
                         }else
                         if(Y > j)
                         {
-                            Y = Y + 4;
-                            if (Y > 49) {
-                                Y = verificaQn(Y, auxY10);
-                            }
+                            Y = Y + auxYpositiva;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
                         }else
                         {
                             //AQUI OU O CUELHO MORREU OU A ONÇA TA TROLLANDO
-                            X = X - 4;
-                            Y = Y - 4;
-                            if (X < 0) {
-                                X= verificaZero(X, auxX1);
-                            }
-                            if (Y < 0) {
-                                Y = verificaZero(Y, auxY10);
-                            }
+                            X = X - auxXnegativa;
+                            Y = Y - auxYnegativa;
                             fugir[0] = X;
                             fugir[1] = Y;
                             return fugir;
                         }
                     }
+                }
+                else
+                {
+                    //COLOCAR A CAÇA AS PLANTAS AQUI
+                    //COLOCAR A CAÇA AS PLANTAS AQUI
+                    //COLOCAR A CAÇA AS PLANTAS AQUI
+                    //COLOCAR A CAÇA AS PLANTAS AQUI
                 }
             }
         }
@@ -499,33 +465,154 @@ public class gerenciaLista {
     public Onca getPrimeiraOnca() {
         return primeiroOnca;
     }
-    public Coelho getPrimeiraCueio() {
+    
+    void verificaStatus(Coelho x) {
+        while( x.prox != null)
+        {
+            if(x.reproducao == 0)
+            {
+                reproducaoCueio();
+                x.reproducao = 24;
+            }else
+            {
+                x.reproducao --;
+            }
+            if(x.vida == 0)
+            {
+                //Elimina coelho
+                //Elimina coelho
+            }else{
+                x.vida --;
+            }
+            
+            /*
+            CRIA METODO PRA COMIDA DOS CUELHO QUE RESETA A 
+            FOME PARA O MAXIMO QUANDO ELE COME UMA PLANTA
+            
+            COLOCAR ELE AQUI
+            ..
+            ..
+            COLOCAR ELE AQUI
+            */
+            
+            if(x.fome == 0)
+            {
+                //ELIMINAR O COELHO
+                //ELIMINAR O COELHO
+                //ELIMINAR O COELHO
+            }else
+            {
+                x.fome --;
+            }
+            
+            x = x.prox;
+        }
+    }
+    
+    void verificaStatus(Onca x) {
+        while( x.prox != null)
+        {
+            if(x.reproducao == 0)
+            {
+                reproducaoOnca();
+                x.reproducao = 48;
+            }else
+            {
+                x.reproducao --;
+            }
+            if(x.vida == 0)
+            {
+                //Elimina onca
+                //Elimina onca
+            }else{
+                x.vida --;
+            }
+            //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
+            coelhoEmpanado(x);
+            
+            
+            if(x.fome == 0)
+            {
+                //ELIMINAR A ONCA
+                //ELIMINAR A ONCA
+                //ELIMINAR A ONCA
+            }else
+            {
+                x.fome --;
+            }
+            
+            x = x.prox;
+        }
+    }
+    public Coelho getPrimeiroCueio() {
         return primeiroCoelho;
     }
-    private int verificaZero(int X, int aux) {
+    private int verificaNegativa(int X, int aux) {
         while (X - aux != 0) {
             aux++;
         }
         return aux;
     }
 
-    private int verificaQn(int X, int aux) {
+    private int verificaPositiva(int X, int aux) {
         while (X + aux != 49) {
             aux--;
         }
         return aux;
     }
 
+    private void reproducaoCueio() 
+    {
+        // INSERIR 10 FILHOTES
+        // INSERIR 10 FILHOTES
+        // INSERIR 10 FILHOTES
+        // INSERIR 10 FILHOTES
+    }
+
+    private void reproducaoOnca() {
+        // INSERIR 2 FILHOTES
+        // INSERIR 2 FILHOTES
+        // INSERIR 2 FILHOTES
+        // INSERIR 2 FILHOTES
+    }
+
+    private void coelhoEmpanado(Onca x) {
+        Coelho temp = getPrimeiroCueio();
+        while(temp.prox != null)
+        {
+            if(x.x == temp.x && x.y ==temp.y){
+                //ELIMINA COELHO 
+                //ELIMINA COELHO 
+                //ELIMINA COELHO 
+                
+                x.fome = 12;
+                break;
+            }
+            temp = temp.prox;
+        }
+    }
+
+   
+
+    
+
     
 }
 
 
 /*
- Grama
- Verificar Caça coelho
- Verificar Caça Onça
- Visão
- Verificar os Status
- Alterar os status
- Movimentação
+Grama
+Criar sistema reprodutor das grama
+Criar as grama
+Matar as grama
+Matar os cuelho
+Matar as onca
+------------------------------
+------------------------------
+ Verificar Caça coelho 
+ Verificar os Status - FEITO
+ Alterar os status - FEITO
+ Verificar Caça Onça - feito
+ Visão - feito
+ Movimentação - feito
  */
