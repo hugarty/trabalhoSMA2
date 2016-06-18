@@ -16,9 +16,12 @@ public class gerenciaLista {
     Coelho ultimoCoelho;
     Onca primeiroOnca;
     Onca ultimoOnca;
+    Planta primeiroGrama;
+    Planta ultimoGrama;
     Ambiente amb = new Ambiente();
     int nCoelhos;
     int nOncas;
+    int nPlantas;
 
     gerenciaLista() {
         this.primeiroCoelho = null;
@@ -69,23 +72,46 @@ public class gerenciaLista {
         nCoelhos++;
 
     }
+ void inserePlanta(Planta novoGrama) {
 
-    //ISSO AKI É PRA TESTA SE A LISTA TA ENCADEANDO MESMO. (DE COELHOS)
-    void printaLista() {
-        int posNaListaCoelho = 0;
-        Coelho temp = primeiroCoelho;
-        while (temp != null) {
-            System.out.printf("\nCoelho: %d. Posição dele na matriz. [%d][%d]", posNaListaCoelho, temp.getX(), temp.getY());
-            temp = temp.prox;
-            posNaListaCoelho++;
+        if (primeiroGrama == null) {
+            primeiroGrama = novoGrama;
+        }
+        if (ultimoGrama != null) {
+            ultimoGrama.prox = novoGrama;
         }
 
-        System.out.printf("\nHeadCoelho: [%d][%d]", primeiroCoelho.getX(), primeiroCoelho.getY());
-        System.out.printf("\nUltimoCoelho: [%d][%d]", ultimoCoelho.getX(), ultimoCoelho.getY());
+        ultimoGrama = novoGrama;
 
-        System.out.printf("\nTamanho da Matriz: [%d]", amb.getMatriz().length);
+        Random rngX = new Random();
+        Random rngY = new Random();
+        //GERA INDEX X E Y, PRA INSERIR NA MATRIZ
+        int rngx = rngX.nextInt(50);
+        int rngy = rngY.nextInt(50);
+
+        boolean v = false;
+
+        //ENQUANTO NOSSO ELEMENTO DE INDEX X E Y GERADO, CONTIVER ALGO Q N SEJA '-', GERA NOVO INDEX X E Y
+        while (v == false) {
+            if (amb.getElementFromIndex(rngx, rngy) != '-') {
+
+                rngx = rngX.nextInt(50);
+                rngy = rngY.nextInt(50);
+
+            } else {
+                v = true;
+            }
+        }
+
+        //CADA INSERIDA O ULTIMOCOELHO VAI SETANDO SEU ATRIBUTO DE POSIÇAO
+        ultimoGrama.setPos(rngx, rngy);
+
+        //SETA ESSE COELHO INSERIDO NA MATRIZ 
+        amb.setElement('P', ultimoGrama.x, ultimoGrama.y);
+        // amb.imprimiTabuleiro();
+        ++nPlantas;
+
     }
-
     void insereOnca(Onca novaOnca) {
 
         if (primeiroOnca == null) {
@@ -171,18 +197,24 @@ public class gerenciaLista {
         }
 
     }
+    void removePlanta(int x, int y) {
+        Planta temp = primeiroGrama;
+        //caso cabeça, caso corpo;
+        if ((primeiroGrama.x == x ) && (y == primeiroGrama.y)) {
+            primeiroGrama = primeiroGrama.prox;
+        } else {
 
-//        void printa_Tabuleiro(){
-//            //Ambiente ambi =amb; 
-//            char[][] matriz= amb.getMatriz();
-//            
-//            for (int i = 0; i < matriz.length; i++) {
-//            for (int j = 0; j < matriz.length; j++) {
-//                System.out.printf("%c ", matriz[i][j]);
-//            }
-//            System.out.println("");
-//        }
-//        }
+            while (temp.prox != null) {
+                if ((temp.prox.x == x) && (temp.prox.y == y) ) {
+                    temp.prox = temp.prox.prox;
+                } else {
+                    temp = temp.prox;
+                }
+            }
+
+        }
+
+    }
     
     
     public void movimentaOnca(Onca x) {
@@ -479,6 +511,7 @@ public class gerenciaLista {
             }
             if(x.vida == 0)
             {
+                removeCoelho(x.x, x.y);
                 //Elimina coelho
                 //Elimina coelho
             }else{
@@ -497,6 +530,7 @@ public class gerenciaLista {
             
             if(x.fome == 0)
             {
+                removeCoelho(x.x, x.y);
                 //ELIMINAR O COELHO
                 //ELIMINAR O COELHO
                 //ELIMINAR O COELHO
@@ -522,6 +556,7 @@ public class gerenciaLista {
             }
             if(x.vida == 0)
             {
+                removeOnca(x);
                 //Elimina onca
                 //Elimina onca
             }else{
@@ -533,6 +568,7 @@ public class gerenciaLista {
             
             if(x.fome == 0)
             {
+                removeOnca(x);
                 //ELIMINAR A ONCA
                 //ELIMINAR A ONCA
                 //ELIMINAR A ONCA
@@ -563,6 +599,15 @@ public class gerenciaLista {
 
     private void reproducaoCueio() 
     {
+        int filhos = 10;
+        int i =0;
+        Coelho coei = new Coelho();
+        while (i < filhos){
+            
+            insereCoelho(coei);
+           i++;
+        }
+        
         // INSERIR 10 FILHOTES
         // INSERIR 10 FILHOTES
         // INSERIR 10 FILHOTES
@@ -570,6 +615,15 @@ public class gerenciaLista {
     }
 
     private void reproducaoOnca() {
+        
+        int filhos = 2;
+        int i =0;
+        Onca onca = new Onca();
+        while (i < filhos){
+            
+            insereOnca(onca);
+           i++;
+        }
         // INSERIR 2 FILHOTES
         // INSERIR 2 FILHOTES
         // INSERIR 2 FILHOTES
@@ -580,10 +634,8 @@ public class gerenciaLista {
         Coelho temp = getPrimeiroCueio();
         while(temp.prox != null)
         {
-            if(x.x == temp.x && x.y ==temp.y){
-                //ELIMINA COELHO 
-                //ELIMINA COELHO 
-                //ELIMINA COELHO 
+            if((x.x == temp.x) && (x.y ==temp.y)){
+                removeCoelho(temp.x, temp.y);
                 
                 x.fome = 12;
                 break;
@@ -616,3 +668,18 @@ Matar as onca
  Visão - feito
  Movimentação - feito
  */
+//ISSO AKI É PRA TESTA SE A LISTA TA ENCADEANDO MESMO. (DE COELHOS)
+//    void printaLista() {
+//        int posNaListaCoelho = 0;
+//        Coelho temp = primeiroCoelho;
+//        while (temp != null) {
+//            System.out.printf("\nCoelho: %d. Posição dele na matriz. [%d][%d]", posNaListaCoelho, temp.getX(), temp.getY());
+//            temp = temp.prox;
+//            posNaListaCoelho++;
+//        }
+//
+//        System.out.printf("\nHeadCoelho: [%d][%d]", primeiroCoelho.getX(), primeiroCoelho.getY());
+//        System.out.printf("\nUltimoCoelho: [%d][%d]", ultimoCoelho.getX(), ultimoCoelho.getY());
+//
+//        System.out.printf("\nTamanho da Matriz: [%d]", amb.getMatriz().length);
+//    }

@@ -23,10 +23,12 @@ public class Ambiente {
 
     int anos = 4;
     
-    public int qtdCoelhos = 40;
-//    static int planta = 123;
+    public int qtdCoelhosInicial = 40;
     public char ambiente[][] = new char[50][50];
-    public int qtdOncas = 8;
+    public int qtdOncasInicial = 8;
+    public int qtdPlantasInicial = (int) ((ambiente.length*ambiente.length)*0.5);
+    public int nPlantas;
+    
     gerenciaLista L;
 //    static void comerPlanta() {
 //        planta--;
@@ -55,8 +57,11 @@ public class Ambiente {
         L = new gerenciaLista();
         adicionarCoelhos();
         adicionarOnca();
+        adicionarPlantas();
+        
         this.anos = anos * 48;
-        while(anos !=0){
+        int cont =0;
+        //while(cont < anos){
             L.amb.imprimiTabuleiro();
             //L.verificaStatus(L.getPrimeiroCueio());
             //L.verificaStatus(L.getPrimeiraOnca());
@@ -64,15 +69,29 @@ public class Ambiente {
             L.movimentaOnca(L.getPrimeiraOnca());
             System.out.println("");
             L.amb.imprimiTabuleiro();
-        }
+          //  cont++;
+        //}
             
-        // imprimiTabuleiro();
+        
+   }
+   
+   public void adicionarPlantas(){
+       int cont = 0 ;
+       
+       while (cont < qtdPlantasInicial){
+           
+           L.inserePlanta(new Planta());
+           cont++;
+       }
+       nPlantas = L.nPlantas;
+       
+       
    }
     public void adicionarCoelhos() {
        
         int cont = 0;
        // INSERE 40 COELHO
-        while (cont < qtdCoelhos) {
+        while (cont < qtdCoelhosInicial) {
             L.insereCoelho(new Coelho());
             cont++;
        }
@@ -85,7 +104,7 @@ public class Ambiente {
       
         int cont = 0;
        // INSERE 8 COELHO
-        while (cont < qtdOncas) {
+        while (cont < qtdOncasInicial) {
             L.insereOnca(new Onca());
             cont++;
        }
