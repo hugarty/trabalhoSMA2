@@ -290,14 +290,14 @@ public class gerenciaLista {
     }
 
     private int verificaZero(int X, int aux) {
-        while (X - aux < 0) {
+        while (X - aux != 0) {
             aux++;
         }
         return aux;
     }
 
     private int verificaQn(int X, int aux) {
-        while (X + aux > 49) {
+        while (X + aux != 49) {
             aux--;
         }
         return aux;
