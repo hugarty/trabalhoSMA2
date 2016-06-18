@@ -189,11 +189,13 @@ public class gerenciaLista {
         int[] visao;
         while(x != null){
             amb.setElement('-', x.getX(), x.getY());
+            System.out.println("Antes - X: "+x.getX()+" - Y: "+x.getY());
             visao = visaoOnca(x);
             int cont = 0;
             //Se tiver algum coelho na area de visão dele
             if (visao[0] != -1) {
                 x.setPos(visao[0], visao[1]);
+                amb.setElement('O', visao[0], visao[1]);
             } //Se não tiver
             else {
                 visao[0] = x.getX();
@@ -241,6 +243,8 @@ public class gerenciaLista {
                 
                 amb.setElement('O', visao[0], visao[1]);
             }
+            System.out.println("Depois - X: "+x.getX()+" - Y: "+x.getY());
+            System.out.println("---------------------");
             x = x.prox;
         }
     }
@@ -267,8 +271,6 @@ public class gerenciaLista {
         if (Y + 6 > 49) {
             auxY20 = verificaQn(Y, auxY20);
         }
-        System.out.println("X: "+X+" - Y: "+Y);
-        
         for (int i = (X - auxX1); i < (X + auxX2); i++) {
             for(int j = (Y - auxY10); j < (Y + auxY20); j++)
             {
