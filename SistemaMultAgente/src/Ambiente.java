@@ -62,18 +62,18 @@ public class Ambiente {
         this.anos = anos * 48;
         int cont =0;
         while(cont < anos){
-            L.amb.imprimiTabuleiro();
-            //L.verificaStatus(L.getPrimeiroCueio());
-            //L.verificaStatus(L.getPrimeiraOnca());
-//            L.movimentaCueio(L.getPrimeiroCueio());
-//            L.movimentaOnca(L.getPrimeiraOnca());
-            System.out.println("");
-            L.amb.imprimiTabuleiro();
             System.out.println("QTD DE PLANTA PPEWRA: "+L.nPlantas);
-            cont++;
-            reproduzPlantas();
             System.out.println("Numero de coelhos: "+L.nCoelhos);
             System.out.println("Numero de oncas: "+L.nOncas);
+           L.amb.imprimiTabuleiro();
+            //L.verificaStatus(L.getPrimeiroCueio());
+          // L.verificaStatus(L.getPrimeiraOnca());
+            L.movimentaCueio(L.getPrimeiroCueio());
+            L.movimentaOnca(L.getPrimeiraOnca());
+            System.out.println("");
+            //L.amb.imprimiTabuleiro();
+            cont++;
+            reproduzPlantas();
             
         }
             
@@ -83,6 +83,7 @@ public class Ambiente {
    void reproduzPlantas(){
        int plantas_filho = (int)(L.nPlantas*0.1);
        int cont = 0;
+     //  Planta p = new Planta();
        while (cont < plantas_filho){
            L.inserePlanta(new Planta());
            cont++;
@@ -91,7 +92,7 @@ public class Ambiente {
    }
    public void adicionarPlantas(){
        int cont = 0 ;
-       
+       // Planta p = new Planta();
        while (cont < qtdPlantasInicial){
            
            L.inserePlanta(new Planta());
@@ -105,25 +106,27 @@ public class Ambiente {
        
         int cont = 0;
        // INSERE 40 COELHO
+        // Coelho c = new Coelho();
         while (cont < qtdCoelhosInicial) {
             L.insereCoelho(new Coelho());
             cont++;
        }
        
 
-       System.out.println("\nNumero de coelhos: " + L.nCoelhos);
+       
     }
     
     public void adicionarOnca() {
       
         int cont = 0;
        // INSERE 8 COELHO
+        //Onca o = new Onca();
         while (cont < qtdOncasInicial) {
             L.insereOnca(new Onca());
             cont++;
        }
         
-System.out.println("\nNumero de oncas: " + L.nOncas);
+
 
        
     }

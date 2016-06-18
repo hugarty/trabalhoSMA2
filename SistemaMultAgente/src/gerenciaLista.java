@@ -548,7 +548,7 @@ public class gerenciaLista {
         {
             if(x.reproducao == 0)
             {
-                reproducaoOnca();
+                //reproducaoOnca();
                 x.reproducao = 48;
             }else
             {
@@ -556,19 +556,19 @@ public class gerenciaLista {
             }
             if(x.vida == 0)
             {
-                removeOnca(x);
+              //  removeOnca(x);
                 //Elimina onca
                 //Elimina onca
             }else{
                 x.vida --;
             }
             //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
-            coelhoEmpanado(x);
+           // coelhoEmpanado(x);
             
             
             if(x.fome == 0)
             {
-                removeOnca(x);
+               // removeOnca(x);
                 //ELIMINAR A ONCA
                 //ELIMINAR A ONCA
                 //ELIMINAR A ONCA
@@ -635,7 +635,7 @@ public class gerenciaLista {
         while(temp.prox != null)
         {
             if((x.x == temp.x) && (x.y ==temp.y)){
-                removeCoelho(temp.x, temp.y);
+                //removeCoelho(temp.x, temp.y);
                 
                 x.fome = 12;
                 break;

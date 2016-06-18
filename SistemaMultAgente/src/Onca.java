@@ -35,9 +35,9 @@ public class Onca {
     
     Onca(){
         this.prox=null;
-        reproducao = 48;
-        fome = 12;
-        vida = 384;
+        this.reproducao = 48;
+       this.fome = 12;
+        this.vida = 384;
         
     }
     //Discernir um animal do outro
