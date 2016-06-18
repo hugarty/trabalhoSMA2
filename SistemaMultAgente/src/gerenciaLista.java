@@ -382,6 +382,7 @@ public class gerenciaLista {
     
     private int[] visaoCueio(Coelho x) {
         int[] fugir = new int [2];
+        boolean AchouMaconha = false;
         int X = x.getX();
         int Y = x.getY();
         int auxXnegativa = 4;
@@ -403,7 +404,7 @@ public class gerenciaLista {
         for (int i = (X - auxXnegativa); i <= (X + auxXpositiva); i++) {
             for(int j = (Y - auxYnegativa); j <= (Y + auxYpositiva); j++)
             {
-                if(amb.ambiente [i][j] =='O')
+                if(amb.ambiente [i][j] == 'O')
                 {
                     if(X < i)
                     {
@@ -482,13 +483,19 @@ public class gerenciaLista {
                 }
                 else
                 {
-                    //COLOCAR A CAÇA AS PLANTAS AQUI
-                    //COLOCAR A CAÇA AS PLANTAS AQUI
-                    //COLOCAR A CAÇA AS PLANTAS AQUI
-                    //COLOCAR A CAÇA AS PLANTAS AQUI
+                    if(amb.ambiente [i][j] == 'P')
+                    {
+                        fugir[0] = i;
+                        fugir[1] = j;
+                        AchouMaconha = true;
+                    }
                 }
             }
         }
+        if(AchouMaconha == true)
+        {
+            return fugir;
+        }else
         return new int[]{-1, -1};
     }
     public Onca getPrimeiraOnca() {
@@ -511,11 +518,10 @@ public class gerenciaLista {
             
             //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
             plantaEmpanada(x);
+            
             if(x.vida == 0 || x.fome ==0)
             {
                 removeCoelho(x);
-                //Elimina coelho
-                //Elimina coelho
             }else{
                 x.vida --;
                 x.fome --;
@@ -648,12 +654,7 @@ public class gerenciaLista {
 
 
 /*
-Grama
-Criar sistema reprodutor das grama
-Criar as grama
-Matar as grama
-Matar os cuelho
-Matar as onca
+
 ------------------------------
 ------------------------------
  Verificar Caça coelho 

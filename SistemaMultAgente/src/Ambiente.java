@@ -45,13 +45,7 @@ public class Ambiente {
             }
            
         }
-     
-//        for (int x = 0; x < 45; x++) {
-//            for (int y = 0; y < 50; y++) {
-//                ambiente[x][y] = 'x';
-//            }
-//            
-        //}
+        
     }
 
     public void start() {
