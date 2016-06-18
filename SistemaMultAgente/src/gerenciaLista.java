@@ -271,8 +271,8 @@ public class gerenciaLista {
         if (Y + 6 > 49) {
             auxY20 = verificaQn(Y, auxY20);
         }
-        for (int i = (X - auxX1); i < (X + auxX2); i++) {
-            for(int j = (Y - auxY10); j < (Y + auxY20); j++)
+        for (int i = (X - auxX1); i <= (X + auxX2); i++) {
+            for(int j = (Y - auxY10); j <= (Y + auxY20); j++)
             {
                 if(amb.ambiente [i][j] =='C')
                 {
@@ -284,11 +284,224 @@ public class gerenciaLista {
         }
         return new int[]{-1, -1};
     }
+    
+    public void movimentaCueio(Coelho x)
+    {
+        int[] visao;
+        while(x != null){
+            amb.setElement('-', x.getX(), x.getY());
+            System.out.println("Antes - X: "+x.getX()+" - Y: "+x.getY());
+            visao = visaoCueio(x);
+            int cont = 0;
+            //Se tiver algum coelho na area de visão dele
+            if (visao[0] != -1) {
+                x.setPos(visao[0], visao[1]);
+                amb.setElement('C', visao[0], visao[1]);
+            } //Se não tiver
+            else {
+                visao[0] = x.getX();
+                visao[1] = x.getY();
+                Random ale = new Random();
+                int auxiliar;
+                
+                while(cont < 2){
+                    auxiliar = ale.nextInt(4)+2;
 
+                    if(auxiliar % 2 == 0){
+                        if(auxiliar <= 3){
+                            visao[0]--;
+                        }else
+                            visao[0]++;
+                    } 
+                    else
+                    {
+                        if (auxiliar <= 3) {
+                            visao[1]--;
+                        } 
+                        else 
+                            visao[1]++;
+                    }
+                    cont++;
+                }
+                
+                if(visao[0] < 0){
+                     visao[0] = 0;
+                }
+                else
+                if(visao[0]> 49){
+                    visao[0] = 49;
+                }
+                else
+                if(visao[1] < 0){
+                    visao[1] = 0;
+                }
+                else
+                if(visao[1] > 49) {
+                    visao[1] = 49;
+                }
+                
+                x.setPos(visao[0], visao[1]);
+                
+                amb.setElement('C', visao[0], visao[1]);
+            }
+            System.out.println("Depois - X: "+x.getX()+" - Y: "+x.getY());
+            System.out.println("---------------------");
+            x = x.prox;
+        }
+    }
+    
+    private int[] visaoCueio(Coelho x) {
+        int[] fugir = new int [2];
+        int X = x.getX();
+        int Y = x.getY();
+        int auxX1 = 4;
+        int auxX2 = 4;
+        int auxY10 = 4;
+        int auxY20 = 4;
+        if (X - 4 < 0) {
+            auxX1 = verificaZero(X, auxX1);
+        }
+        if (Y - 4 < 0) {
+            auxY10 = verificaZero(Y, auxY10);
+        }
+        if (X + 4 > 49) {
+            auxX2 = verificaQn(X, auxX2);
+        }
+        if (Y + 4 > 49) {
+            auxY20 = verificaQn(Y, auxY20);
+        }
+        for (int i = (X - auxX1); i <= (X + auxX2); i++) {
+            for(int j = (Y - auxY10); j <= (Y + auxY20); j++)
+            {
+                if(amb.ambiente [i][j] =='O')
+                {
+                    if(X < i)
+                    {
+                        if (Y < j) {
+                            //Essa subtração aqui é pra fugir dus animal
+                            X = X - 4;
+                            Y = Y - 4;
+                            if (X < 0) {
+                                X= verificaZero(X, auxX1);
+                            }
+                            if (Y < 0) {
+                                Y = verificaZero(Y, auxY10);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }else
+                        if(Y >= j)
+                        {
+                            X = X - 4;
+                            Y = Y + 4;
+                            if (X < 0) {
+                                X= verificaZero(X, auxX1);
+                            }
+                            if (Y > 49) {
+                                Y = verificaQn(Y, auxY10);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }else
+                        {
+                            
+                            X = X - 4;
+                            if (X < 0) {
+                                X = verificaZero(X, auxX1);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }
+                    }else
+                    if(X > i)
+                    {
+                        if(Y < j){
+                            //Essa subtração aqui é pra 
+                            X = X + 4;
+                            Y = Y - 4;
+                            if (X > 49) {
+                                X= verificaQn(X, auxX1);
+                            }
+                            if (Y < 0) {
+                                Y = verificaZero(Y, auxY10);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }else
+                        if(Y > j)
+                        {
+                            X = X + 4;
+                            Y = Y + 4;
+                            if (X > 49) {
+                                X= verificaQn(X, auxX1);
+                            }
+                            if (Y > 49) {
+                                Y = verificaQn(Y, auxY10);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }else
+                        {
+                            X = X + 4;
+                            if (X > 49) {
+                                X= verificaQn(X, auxX1);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }
+                    }else
+                    {
+                        if(Y < j){
+                            Y = Y - 4;
+                            if (Y < 0) {
+                                Y = verificaZero(Y, auxY10);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }else
+                        if(Y > j)
+                        {
+                            Y = Y + 4;
+                            if (Y > 49) {
+                                Y = verificaQn(Y, auxY10);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }else
+                        {
+                            //AQUI OU O CUELHO MORREU OU A ONÇA TA TROLLANDO
+                            X = X - 4;
+                            Y = Y - 4;
+                            if (X < 0) {
+                                X= verificaZero(X, auxX1);
+                            }
+                            if (Y < 0) {
+                                Y = verificaZero(Y, auxY10);
+                            }
+                            fugir[0] = X;
+                            fugir[1] = Y;
+                            return fugir;
+                        }
+                    }
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
     public Onca getPrimeiraOnca() {
         return primeiroOnca;
     }
-
+    public Coelho getPrimeiraCueio() {
+        return primeiroCoelho;
+    }
     private int verificaZero(int X, int aux) {
         while (X - aux != 0) {
             aux++;
@@ -302,6 +515,8 @@ public class gerenciaLista {
         }
         return aux;
     }
+
+    
 }
 
 

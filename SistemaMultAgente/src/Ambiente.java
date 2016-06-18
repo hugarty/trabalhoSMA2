@@ -53,7 +53,8 @@ public class Ambiente {
         adicionarCoelhos();
         adicionarOnca();
         L.amb.imprimiTabuleiro();
-        L.movimentaOnca(L.getPrimeiraOnca());
+        L.movimentaCueio(L.getPrimeiraCueio());
+        //L.movimentaOnca(L.getPrimeiraOnca());
         System.out.println("");
         L.amb.imprimiTabuleiro();
         // imprimiTabuleiro();
