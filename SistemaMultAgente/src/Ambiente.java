@@ -66,10 +66,13 @@ public class Ambiente {
             System.out.println("Numero de coelhos: "+L.nCoelhos);
             System.out.println("Numero de oncas: "+L.nOncas);
            L.amb.imprimiTabuleiro();
-            //L.verificaStatus(L.getPrimeiroCueio());
-          // L.verificaStatus(L.getPrimeiraOnca());
-            L.movimentaCueio(L.getPrimeiroCueio());
-            L.movimentaOnca(L.getPrimeiraOnca());
+           
+            L.verificaStatusOnca();
+            L.movimentaOnca();
+            
+            L.verificaStatusCoelho();
+            L.movimentaCueio();
+            
             System.out.println("");
             //L.amb.imprimiTabuleiro();
             cont++;

@@ -36,7 +36,7 @@ public class Onca {
     Onca(){
         this.prox=null;
         this.reproducao = 48;
-       this.fome = 12;
+        this.fome = 12;
         this.vida = 384;
         
     }

@@ -34,7 +34,9 @@ public class Coelho {
     Coelho prox;
     
         Coelho () {
-          
+            this.vida = 94;
+            this.fome= 4;
+            this.reproducao=24;
             this.prox =null;
 }
 //    //primeiro valor é o tanto de filhotes
