@@ -259,15 +259,12 @@ public void inserePlanta(Planta novoGrama) {
                 if(visao[0] < 0){
                      visao[0] = 0;
                 }
-                else
                 if(visao[0]> 49){
                     visao[0] = 49;
                 }
-                else
                 if(visao[1] < 0){
                     visao[1] = 0;
                 }
-                else
                 if(visao[1] > 49) {
                     visao[1] = 49;
                 }
@@ -337,18 +334,19 @@ public void inserePlanta(Planta novoGrama) {
                 Random ale = new Random();
                 int auxiliar;
                 
-                while(cont < 2){
-                    auxiliar = ale.nextInt(4)+2;
-
+                while(cont < 2)
+                {
+                    auxiliar = ale.nextInt(10)+1;
+                    //System.out.println("\nCoelho\nValor do Auxiliar :"+auxiliar+"\nValor do resto: "+(auxiliar % 2));
                     if(auxiliar % 2 == 0){
-                        if(auxiliar <= 3){
+                        if(auxiliar <= 6){
                             visao[0]--;
                         }else
                             visao[0]++;
                     } 
                     else
                     {
-                        if (auxiliar <= 3) {
+                        if (auxiliar <= 6) {
                             visao[1]--;
                         } 
                         else 
@@ -360,15 +358,12 @@ public void inserePlanta(Planta novoGrama) {
                 if(visao[0] < 0){
                      visao[0] = 0;
                 }
-                else
                 if(visao[0]> 49){
                     visao[0] = 49;
                 }
-                else
                 if(visao[1] < 0){
                     visao[1] = 0;
                 }
-                else
                 if(visao[1] > 49) {
                     visao[1] = 49;
                 }
@@ -384,7 +379,9 @@ public void inserePlanta(Planta novoGrama) {
     
     
     private int[] visaoCueio(Coelho x) {
+        Random l = new Random();
         int[] fugir = new int [2];
+        int[] fugir2 = new int [2];
         boolean AchouMaconha = false;
         int X = x.getX();
         int Y = x.getY();
@@ -486,20 +483,29 @@ public void inserePlanta(Planta novoGrama) {
                 }
                 else
                 {
-                    if(amb.ambiente [i][j] == 'P')
+                    if(amb.ambiente [i][j] == 'P' && AchouMaconha == false)
                     {
                         fugir[0] = i;
                         fugir[1] = j;
                         AchouMaconha = true;
                     }
+                    if(amb.ambiente [i][j] == 'P' )
+                    {
+                        fugir2[0] = i;
+                        fugir2[1] = j;
+                    }
                 }
             }
         }
+        
         if(AchouMaconha == true)
         {
-            return fugir;
+            if(l.nextInt(2) == 0){
+                return fugir;
+            }else
+                return fugir2;
         }else
-        return new int[]{-1, -1};
+            return new int[]{-1, -1};
     }
     public Onca getPrimeiraOnca() {
         return this.primeiroOnca;
@@ -579,14 +585,14 @@ public void inserePlanta(Planta novoGrama) {
         return this.primeiroCoelho;
     }
     private int verificaNegativa(int X, int aux) {
-        while (X - aux != 0) {
+        while (X - aux < 0) {
             aux++;
         }
         return aux;
     }
 
     private int verificaPositiva(int X, int aux) {
-        while (X + aux != 49) {
+        while (X + aux > 49) {
             aux--;
         }
         return aux;
