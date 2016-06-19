@@ -185,7 +185,7 @@ public class gerenciaLista {
 
             while (temp.prox != null) {
                 if (temp.prox == onca) {
-                    amb.setElement('-', temp.prox.x, temp.prox.y);
+                   amb.setElement('-', temp.prox.x, temp.prox.y);
                     temp.prox = temp.prox.prox;
                 } else {
                     temp = temp.prox;
@@ -499,14 +499,14 @@ public class gerenciaLista {
         return new int[]{-1, -1};
     }
     public Onca getPrimeiraOnca() {
-        return primeiroOnca;
+        return this.primeiroOnca;
     }
     
     void verificaStatusCoelho() {
         Coelho x = primeiroCoelho;
         while( x != null)
         {
-            if(x.reproducao == 0)
+            if(x.reproducao == 1)
             {
                 reproducaoCueio();
                 x.reproducao = 24;
@@ -519,7 +519,7 @@ public class gerenciaLista {
             //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
             plantaEmpanada(x);
             
-            if(x.vida == 0 || x.fome ==0)
+            if(x.vida == 1 || x.fome ==1)
             {
                 removeCoelho(x);
             }else{
@@ -535,7 +535,7 @@ public class gerenciaLista {
         Onca x = primeiroOnca;
         while( x != null)
         {
-            if(x.reproducao == 0)
+            if(x.reproducao == 1)
             {
                 reproducaoOnca();
                 x.reproducao = 48;
@@ -547,7 +547,7 @@ public class gerenciaLista {
             //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
            coelhoEmpanado(x);
             
-           if(x.vida == 0 || x.fome ==0)
+           if(x.vida == 1 || x.fome ==1)
             {
                 removeOnca(x);
             }else{
@@ -560,10 +560,10 @@ public class gerenciaLista {
     }
     public Planta getPrimeiraPlanta()
     {
-        return primeiroGrama;
+        return this.primeiroGrama;
     }
     public Coelho getPrimeiroCueio() {
-        return primeiroCoelho;
+        return this.primeiroCoelho;
     }
     private int verificaNegativa(int X, int aux) {
         while (X - aux != 0) {
@@ -615,7 +615,7 @@ public class gerenciaLista {
         {
             if((x.x == temp.x) && (x.y ==temp.y)){
                 removeCoelho(temp);
-                
+                amb.setElement('O', x.x, x.y);
                 x.fome = 12;
                 break;
             }
@@ -629,6 +629,7 @@ public class gerenciaLista {
         {
             if((x.x == temp.x) && (x.y ==temp.y)){
                 removePlanta(temp.x, temp.y);
+                amb.setElement('C', x.x, x.y);
                 x.fome = 4;
                 break;
             }
