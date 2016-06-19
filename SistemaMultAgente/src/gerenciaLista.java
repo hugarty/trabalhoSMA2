@@ -26,13 +26,15 @@ public class gerenciaLista {
     gerenciaLista() {
         this.primeiroCoelho = null;
         this.primeiroOnca = null;
+        this.primeiroGrama=null;
+        this.nPlantas = 0;
         this.nCoelhos = 0;
         this.nOncas = 0;
     }
 
     //INSERE ULTIMO
 
-    void insereCoelho(Coelho novoCoelho) {
+  public  void insereCoelho(Coelho novoCoelho) {
 
         if (primeiroCoelho == null) {
             primeiroCoelho = novoCoelho;
@@ -72,7 +74,7 @@ public class gerenciaLista {
         nCoelhos++;
 
     }
- void inserePlanta(Planta novoGrama) {
+public void inserePlanta(Planta novoGrama) {
 
         if (primeiroGrama == null) {
             primeiroGrama = novoGrama;
@@ -112,7 +114,7 @@ public class gerenciaLista {
         ++nPlantas;
 
     }
-    void insereOnca(Onca novaOnca) {
+  public  void insereOnca(Onca novaOnca) {
 
         if (primeiroOnca == null) {
             primeiroOnca = novaOnca;
@@ -152,7 +154,7 @@ public class gerenciaLista {
     }
 
     //caso cabeça, caso corpo;
-    void removeCoelho(Coelho coe) {
+    public void removeCoelho(Coelho coe) {
         //TEMP APONTA PRO MESMO Q O PRIMEIROCOELHO
         Coelho temp = primeiroCoelho;
         //SE O HEAD É O COELHO A SER REMOVIDO. O HEAD PASSA APONTAR PRO PROXIMO.
@@ -175,7 +177,7 @@ public class gerenciaLista {
         nCoelhos--;
     }
 
-    void removeOnca(Onca onca) {
+   public void removeOnca(Onca onca) {
         Onca temp = primeiroOnca;
         //caso cabeça, caso corpo;
         if (primeiroOnca == onca) {
@@ -194,16 +196,16 @@ public class gerenciaLista {
         }
        nOncas--;
     }
-    void removePlanta(int x, int y) {
+   public void removePlanta(Planta x) {
         Planta temp = primeiroGrama;
         //caso cabeça, caso corpo;
-        if ((primeiroGrama.x == x ) && (y == primeiroGrama.y)) {
+        if (primeiroGrama==x) {
             amb.setElement('-', primeiroGrama.x, primeiroGrama.y);
             primeiroGrama = primeiroGrama.prox;
         } else {
 
             while (temp.prox != null) {
-                if ((temp.prox.x == x) && (temp.prox.y == y) ) {
+                if (temp.prox == x ) {
                     amb.setElement('-', temp.prox.x, temp.prox.y);
                     temp.prox = temp.prox.prox;
                 } else {
@@ -271,7 +273,7 @@ public class gerenciaLista {
                 }
                 
                 x.setPos(visao[0], visao[1]);
-                
+                 System.out.println(visao[0]+" "+visao[1]);
                 amb.setElement('O', visao[0], visao[1]);
             }
             System.out.print("|");
@@ -319,6 +321,7 @@ public class gerenciaLista {
     {
         int[] visao;
         Coelho x = primeiroCoelho;
+        System.out.println();
         while(x != null){
             amb.setElement('-', x.getX(), x.getY());
             visao = visaoCueio(x);
@@ -371,7 +374,7 @@ public class gerenciaLista {
                 }
                 
                 x.setPos(visao[0], visao[1]);
-                
+                System.out.println(visao[0]+" "+visao[1]);
                 amb.setElement('C', visao[0], visao[1]);
             }
             System.out.print("|");
@@ -502,15 +505,24 @@ public class gerenciaLista {
         return this.primeiroOnca;
     }
     
-    void verificaStatusCoelho() {
+   public void verificaStatusCoelho() {
         Coelho x = primeiroCoelho;
         while( x != null)
         {
+            if(x.vida == 1 || x.fome ==1)
+            {
+                System.out.printf("\nCoelho: [%d][%d], morreu. Fome: %d\n", x.x,x.y,x.fome);
+                removeCoelho(x);
+            }else{
+                x.vida --;
+                x.fome --;
+            }
             if(x.reproducao == 1)
             {
+                    if(nCoelhos+nOncas+nPlantas+10 < amb.getMatriz().length*amb.getMatriz().length){
                 reproducaoCueio();
                 x.reproducao = 24;
-                
+                    }
             }else
             {
                 x.reproducao --;
@@ -519,26 +531,26 @@ public class gerenciaLista {
             //METODO QUE RESETA A FOME PARA O 12 QUANDO A ONCA SE ALIMENTA
             plantaEmpanada(x);
             
-            if(x.vida == 1 || x.fome ==1)
-            {
-                removeCoelho(x);
-            }else{
-                x.vida --;
-                x.fome --;
-            }
             
             x = x.prox;
         }
     }
     
-    void verificaStatusOnca() {
+   public void verificaStatusOnca() {
         Onca x = primeiroOnca;
+        while (x!= null){
+            System.out.printf("\nOnça [%d][%d]", x.x,x.y);
+            x = x.prox;
+        }
+        x=primeiroOnca;
         while( x != null)
         {
             if(x.reproducao == 1)
             {
+                 if(nCoelhos+nOncas+nPlantas+10 < amb.getMatriz().length*amb.getMatriz().length){
                 reproducaoOnca();
                 x.reproducao = 48;
+                 }
             }else
             {
                 x.reproducao --;
@@ -549,6 +561,7 @@ public class gerenciaLista {
             
            if(x.vida == 1 || x.fome ==1)
             {
+                System.out.printf("\nOnça: [%d][%d], morreu. Fome: %d\n", x.x,x.y,x.fome);
                 removeOnca(x);
             }else{
                 x.vida --;
@@ -614,6 +627,7 @@ public class gerenciaLista {
         while(temp != null)
         {
             if((x.x == temp.x) && (x.y ==temp.y)){
+                System.out.printf("\nOnça: [%d][%d]. Comeu Coelho: [%d][%d]", x.x,x.y,temp.x,temp.y);
                 removeCoelho(temp);
                 amb.setElement('O', x.x, x.y);
                 x.fome = 12;
@@ -628,7 +642,7 @@ public class gerenciaLista {
         while(temp != null)
         {
             if((x.x == temp.x) && (x.y ==temp.y)){
-                removePlanta(temp.x, temp.y);
+                removePlanta(temp);
                 amb.setElement('C', x.x, x.y);
                 x.fome = 4;
                 break;

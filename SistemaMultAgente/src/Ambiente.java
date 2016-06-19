@@ -21,12 +21,12 @@ import java.util.Random;
 //cada mês tem 4 semanas 
 public class Ambiente {
 
-    int anos = 3;
+    int anos = 20;
     
-    public int qtdCoelhosInicial = 40;
+    public int qtdCoelhosInicial = 80;
     public char ambiente[][] = new char[50][50];
-    public int qtdOncasInicial = 8;
-    public int qtdPlantasInicial = (int) ((ambiente.length*ambiente.length)*0.02);
+    public int qtdOncasInicial = 16;
+    public int qtdPlantasInicial = (int) ((ambiente.length*ambiente.length)*0.5);
     public int nPlantas;
     public int rodadas=1;
     gerenciaLista L;
@@ -58,7 +58,7 @@ public class Ambiente {
         int cont = 0;
         while (cont < anos) {
             System.out.println("RODADA NUMERO: "+rodadas);
-            System.out.println("QTD DE PLANTA PPEWRA: " + L.nPlantas);
+            System.out.println("Numero de plantas: " + L.nPlantas);
             System.out.println("Numero de coelhos: " + L.nCoelhos);
             System.out.println("Numero de oncas: " + L.nOncas);
             L.amb.imprimiTabuleiro();
@@ -66,15 +66,18 @@ public class Ambiente {
             
             L.verificaStatusCoelho();
             L.verificaStatusOnca();
+          //  if(L.nCoelhos>0){
             L.movimentaCueio();
+          //  }
+           // if(L.nOncas>0){
             L.movimentaOnca();
-
+           // }
             //System.out.println("Fome Cu: "+L.getPrimeiroCueio().fome);
             System.out.println("");
             //L.amb.imprimiTabuleiro();
             rodadas++;
             cont++;
-           if(L.nPlantas < 2000){
+           if(L.nPlantas < 2270){
             reproduzPlantas();
             }
         }
