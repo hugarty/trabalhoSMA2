@@ -23,7 +23,8 @@ public class gerenciaLista {
     public int nOncas;
     public int nPlantas;
     public int qtdcoelho = 0;
-    public int qtdPlanta=0;
+    public int qtdPlanta = 0;
+
     gerenciaLista() {
         this.primeiroCoelho = ultimoCoelho = null;
         this.primeiroOnca = ultimoOnca = null;
@@ -96,7 +97,6 @@ public class gerenciaLista {
 //        System.out.printf("\nPrimeiro Onça [%d][%d]", primeiroOnca.x, primeiroOnca.y);
 //        System.out.printf("\nUltimo Onça [%d][%d]", ultimoOnca.x, ultimoOnca.y);
 //    }
-
     public void inserePlanta(Planta novoGrama) {
 
         if (primeiroGrama == null) {
@@ -189,7 +189,7 @@ public class gerenciaLista {
                 if (temp.prox.x == x && temp.prox.y == y) {
                     if (temp.prox.x == ultimoCoelho.x && temp.prox.y == ultimoCoelho.y) {
                         amb.setElement('-', x, y);
-                        temp.prox=temp.prox.prox;
+                        temp.prox = temp.prox.prox;
                         ultimoCoelho = temp;
                         break;
                     }
@@ -218,7 +218,7 @@ public class gerenciaLista {
                 if (temp.prox == onca) {
                     if (temp.prox == ultimoOnca) {
                         amb.setElement('-', onca.x, onca.y);
-                        temp.prox=temp.prox.prox;
+                        temp.prox = temp.prox.prox;
                         ultimoOnca = temp;
                         break;
                     }
@@ -244,7 +244,7 @@ public class gerenciaLista {
                 if (temp.prox == x) {
                     if (temp.prox == ultimoGrama) {
                         amb.setElement('-', ultimoGrama.x, ultimoGrama.y);
-                        temp.prox=temp.prox.prox;
+                        temp.prox = temp.prox.prox;
                         ultimoGrama = temp;
                         break;
                     }
@@ -508,26 +508,30 @@ public class gerenciaLista {
                 }
             }
         }
-        if (X - 2 < 0) 
+        if (X - 2 < 0) {
             cpXnegativa = verificaNegativa(X, cpXnegativa);
-        if (Y - 2 < 0) 
+        }
+        if (Y - 2 < 0) {
             cpYnegativa = verificaNegativa(Y, cpYnegativa);
-        if (X + 2 > 49) 
+        }
+        if (X + 2 > 49) {
             cpXpositiva = verificaPositiva(X, cpXpositiva);
-        if (Y + 2 > 49) 
+        }
+        if (Y + 2 > 49) {
             cpYpositiva = verificaPositiva(Y, cpYpositiva);
-        
+        }
+
         for (int i = (X - cpXnegativa); i <= (X + cpXpositiva); i++) {
             for (int j = (Y - cpYnegativa); j <= (Y + cpYpositiva); j++) {
                 if (amb.ambiente[i][j] == 'P' && AchouMaconha == false) {
-                        fugir[0] = i;
-                        fugir[1] = j;
-                        AchouMaconha = true;
-                    }
-                    if (amb.ambiente[i][j] == 'P') {
-                        fugir2[0] = i;
-                        fugir2[1] = j;
-                    }
+                    fugir[0] = i;
+                    fugir[1] = j;
+                    AchouMaconha = true;
+                }
+                if (amb.ambiente[i][j] == 'P') {
+                    fugir2[0] = i;
+                    fugir2[1] = j;
+                }
             }
         }
         if (AchouMaconha == true) {
@@ -543,17 +547,11 @@ public class gerenciaLista {
 
     public void verificaStatusCoelho() {
         Coelho x = primeiroCoelho;
-        
-        while (x != null) {
-            qtdcoelho++;
-            System.out.printf("\n%d COELHO: [%d][%d]",qtdcoelho, x.x, x.y);
-            x = x.prox;
+
+        if (ultimoCoelho != null) {
+            System.out.printf("\nUltimo COELHO: [%d][%d]", ultimoCoelho.x, ultimoCoelho.y);
         }
-        
-        if(ultimoCoelho!=null){
-            System.out.printf("\nUltimo COELHO: [%d][%d]",ultimoCoelho.x,ultimoCoelho.y);
-        }
-            x=primeiroCoelho;
+        x = primeiroCoelho;
         while (x != null) {
             if (x.vida == 1 || x.fome == 1) {
                 System.out.printf("\nCoelho: [%d][%d], morreu. Fome: %d. VIDA: %d", x.x, x.y, x.fome, x.vida);
@@ -562,12 +560,24 @@ public class gerenciaLista {
                 x.vida--;
                 x.fome--;
             }
+
             if (x.reproducao == 1) {
                 x.reproducao = 24;
-               // repCoelho++;
-                if (qtdcoelho + nOncas + qtdPlanta + 10 < amb.getMatriz().length * amb.getMatriz().length) {
-                    reproducaoCueio();
+                int espacoVazio = 0;
+                for (int p = 0; p < amb.getMatriz().length; p++) {
+                    for (int k = 0; k < amb.getMatriz().length; k++) {
+                        if (amb.ambiente[p][k] == '-') {
+                            espacoVazio++;
+                        }
+                    }
                 }
+                // repCoelho++;
+                if (qtdcoelho + nOncas + qtdPlanta + 10 < amb.getMatriz().length * amb.getMatriz().length) {
+                    if (espacoVazio > 10) {
+                        reproducaoCueio();
+                    }
+                }
+                espacoVazio=0;
             } else {
                 x.reproducao--;
             }
@@ -585,19 +595,19 @@ public class gerenciaLista {
         Onca x = primeiroOnca;
         int qtdonca = 1;
         while (x != null) {
-            System.out.printf("\n%d Onça [%d][%d]",qtdonca, x.x, x.y);
+            System.out.printf("\n%d Onça [%d][%d]", qtdonca, x.x, x.y);
             qtdonca++;
             x = x.prox;
         }
-        if(ultimoOnca!=null){
-         System.out.printf("\nUltimo ONÇA: [%d][%d]",ultimoOnca.x,ultimoOnca.y);
+        if (ultimoOnca != null) {
+            System.out.printf("\nUltimo ONÇA: [%d][%d]", ultimoOnca.x, ultimoOnca.y);
         }
-         x = primeiroOnca;
+        x = primeiroOnca;
         while (x != null) {
             if (x.reproducao == 1) {
 
-                    x.reproducao = 48;
-                if (qtdcoelho + nOncas + qtdPlanta + 10 < amb.getMatriz().length * amb.getMatriz().length) {
+                x.reproducao = 48;
+                if (qtdcoelho + nOncas + qtdPlanta + 10 < (amb.getMatriz().length * amb.getMatriz().length) - 50) {
                     reproducaoOnca();
                 }
             } else {
@@ -715,11 +725,16 @@ public class gerenciaLista {
     void loading() {
         System.out.println("loading...");
         Planta tmp = primeiroGrama;
-        while (tmp!=null){
+        while (tmp != null) {
             qtdPlanta++;
-            tmp=tmp.prox;
+            tmp = tmp.prox;
         }
-        
+        Coelho x = primeiroCoelho;
+        while (x != null) {
+            qtdcoelho++;
+            System.out.printf("\n%d COELHO: [%d][%d]", qtdcoelho, x.x, x.y);
+            x = x.prox;
+        }
         for (int i = 0; i < nCoelhos + nOncas; i++) {
             System.out.print("|");
         }

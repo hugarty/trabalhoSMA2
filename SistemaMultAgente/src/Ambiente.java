@@ -23,9 +23,9 @@ public class Ambiente {
 
     int anos = 20;
     
-    public int qtdCoelhosInicial = 5;
+    public int qtdCoelhosInicial = 80;
     public char ambiente[][] = new char[50][50];
-    public int qtdOncasInicial = 1;
+    public int qtdOncasInicial = 40;
     public int qtdPlantasInicial = (int) ((ambiente.length*ambiente.length)*0.5);
     public int nPlantas;
     public int rodadas=1;
