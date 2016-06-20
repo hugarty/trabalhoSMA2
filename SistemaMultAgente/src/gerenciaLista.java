@@ -425,6 +425,10 @@ public class gerenciaLista {
         int auxXpositiva = 4;
         int auxYnegativa = 4;
         int auxYpositiva = 4;
+        int cpXpositiva = 2;
+        int cpXnegativa = 2;
+        int cpYpositiva = 2;
+        int cpYnegativa = 2;
         if (X - 4 < 0) {
             auxXnegativa = verificaNegativa(X, auxXnegativa);
         }
@@ -501,8 +505,21 @@ public class gerenciaLista {
                             return fugir;
                         }
                     }
-                } else {
-                    if (amb.ambiente[i][j] == 'P' && AchouMaconha == false) {
+                }
+            }
+        }
+        if (X - 2 < 0) 
+            cpXnegativa = verificaNegativa(X, cpXnegativa);
+        if (Y - 2 < 0) 
+            cpYnegativa = verificaNegativa(Y, cpYnegativa);
+        if (X + 2 > 49) 
+            cpXpositiva = verificaPositiva(X, cpXpositiva);
+        if (Y + 2 > 49) 
+            cpYpositiva = verificaPositiva(Y, cpYpositiva);
+        
+        for (int i = (X - cpXnegativa); i <= (X + cpXpositiva); i++) {
+            for (int j = (Y - cpYnegativa); j <= (Y + cpYpositiva); j++) {
+                if (amb.ambiente[i][j] == 'P' && AchouMaconha == false) {
                         fugir[0] = i;
                         fugir[1] = j;
                         AchouMaconha = true;
@@ -511,10 +528,8 @@ public class gerenciaLista {
                         fugir2[0] = i;
                         fugir2[1] = j;
                     }
-                }
             }
         }
-
         if (AchouMaconha == true) {
             if (l.nextInt(2) == 0) {
                 return fugir;
