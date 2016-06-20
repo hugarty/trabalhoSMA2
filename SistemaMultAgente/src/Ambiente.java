@@ -59,6 +59,8 @@ public class Ambiente {
          System.out.println("Numero de plantas: " + L.qtdPlanta);
         System.out.println("Numero de coelhos: " + L.qtdcoelho);
         System.out.println("Numero de oncas: " + L.nOncas);
+        L.qtdPlanta=0;
+        L.qtdcoelho=0;
 L.amb.imprimiTabuleiro();
         this.anos = anos * 48;
         int cont = 0;
