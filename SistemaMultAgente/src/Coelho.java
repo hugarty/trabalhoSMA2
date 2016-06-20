@@ -25,15 +25,15 @@ Coelho
 //cada mês tem 4 semanas/round
 
 public class Coelho {
-    String animal ="Coelho";
-    int reproducao ;
-    int x;
-    int y;
-    int vida;
-    int fome;
-    Coelho prox;
+  public  String animal ="Coelho";
+   public int reproducao ;
+  public  int x;
+   public int y;
+   public int vida;
+   public int fome;
+   public Coelho prox;
     
-        Coelho () {
+        public Coelho () {
             this.vida = 94;
             this.fome= 4;
             this.reproducao=24;

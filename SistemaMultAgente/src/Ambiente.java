@@ -23,13 +23,14 @@ public class Ambiente {
 
     int anos = 20;
     
-    public int qtdCoelhosInicial = 80;
+    public int qtdCoelhosInicial = 5;
     public char ambiente[][] = new char[50][50];
-    public int qtdOncasInicial = 16;
+    public int qtdOncasInicial = 1;
     public int qtdPlantasInicial = (int) ((ambiente.length*ambiente.length)*0.5);
     public int nPlantas;
     public int rodadas=1;
-    gerenciaLista L;
+  public  gerenciaLista L;
+  
 //    static void comerPlanta() {
 //        planta--;
 //    }
@@ -50,32 +51,47 @@ public class Ambiente {
 
     public void start() {
         L = new gerenciaLista();
+       adicionarPlantas();
         adicionarCoelhos();
         adicionarOnca();
-       adicionarPlantas();
-
+L.amb.imprimiTabuleiro();
         this.anos = anos * 48;
         int cont = 0;
+       // int cont1=0;
         while (cont < anos) {
+            L.loading();
+            
+            L.verificaStatusOnca();
+            L.movimentaOnca();
+            L.verificaOncaComeuCoelho();
+            
+          //  if(L.nCoelhos>0){
+            L.verificaStatusCoelho();
+//            if(L.repCoelho>0){
+//                while (cont1 < L.repCoelho*10 ){
+//                L.insereCoelho(new Coelho());
+//                cont1++;
+//                }
+//                L.repCoelho=0;
+//            }
+            L.movimentaCueio();
+            L.verificaCoelhoComeuPlanta();
+          //  L.removeCoelho(L.ultimoCoelho.x, L.ultimoCoelho.y);
+            //L.printaTd();
+            System.out.println();
             System.out.println("RODADA NUMERO: "+rodadas);
             System.out.println("Numero de plantas: " + L.nPlantas);
             System.out.println("Numero de coelhos: " + L.nCoelhos);
             System.out.println("Numero de oncas: " + L.nOncas);
             L.amb.imprimiTabuleiro();
-            L.loading();
-            
-            L.verificaStatusCoelho();
-            L.verificaStatusOnca();
-          //  if(L.nCoelhos>0){
-            L.movimentaCueio();
           //  }
            // if(L.nOncas>0){
-            L.movimentaOnca();
            // }
             //System.out.println("Fome Cu: "+L.getPrimeiroCueio().fome);
             System.out.println("");
             //L.amb.imprimiTabuleiro();
             rodadas++;
+            
             cont++;
            if(L.nPlantas < 2270){
             reproduzPlantas();

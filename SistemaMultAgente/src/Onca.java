@@ -25,15 +25,15 @@ passos em direção ao coelho
 //cada mês tem 4 semanas
 public class Onca {
     //TEM QUE SETAR ISSO NA HORA QUE CRIA UMA NOVA ONCA
-    Onca prox;
-    int reproducao;
-    int x;
-    int y;
-    int fome;
-    int vida;
-    String animal = "Onça";
+   public Onca prox;
+   public int reproducao;
+   public int x;
+   public int y;
+  public  int fome;
+  public  int vida;
+   public String animal = "Onça";
     
-    Onca(){
+    public Onca(){
         this.prox=null;
         this.reproducao = 48;
         this.fome = 12;

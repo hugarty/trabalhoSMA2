@@ -9,12 +9,15 @@
  * @author Filipe
  */
 public class Planta {
-    Planta prox;
+   public Planta prox;
     
     int x;
     int y;
     
-    void setPos(int x, int y){
+    public Planta(){
+        this.prox = null;
+    }
+    public void setPos(int x, int y){
         this.x= x;
         this.y = y;
         
