@@ -64,6 +64,7 @@ L.amb.imprimiTabuleiro();
         int cont = 0;
        // int cont1=0;
         while (cont < anos) {
+            rodadas++;
             L.loading();
             
             L.verificaStatusOnca();
@@ -97,7 +98,6 @@ L.amb.imprimiTabuleiro();
             //System.out.println("Fome Cu: "+L.getPrimeiroCueio().fome);
             System.out.println("");
             //L.amb.imprimiTabuleiro();
-            rodadas++;
             
             cont++;
            if(L.nPlantas < 2150){
