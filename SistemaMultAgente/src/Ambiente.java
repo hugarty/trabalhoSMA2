@@ -80,10 +80,12 @@ L.amb.imprimiTabuleiro();
             //L.printaTd();
             System.out.println();
             System.out.println("RODADA NUMERO: "+rodadas);
-            System.out.println("Numero de plantas: " + L.nPlantas);
-            System.out.println("Numero de coelhos: " + L.nCoelhos);
+            System.out.println("Numero de plantas: " + L.qtdPlanta);
+            System.out.println("Numero de coelhos: " + L.qtdcoelho);
             System.out.println("Numero de oncas: " + L.nOncas);
             L.amb.imprimiTabuleiro();
+            L.qtdPlanta=0;
+            L.qtdcoelho=0;
           //  }
            // if(L.nOncas>0){
            // }

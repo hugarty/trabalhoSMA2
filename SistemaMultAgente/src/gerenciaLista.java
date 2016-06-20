@@ -22,8 +22,8 @@ public class gerenciaLista {
     public int nCoelhos;
     public int nOncas;
     public int nPlantas;
-    public int repCoelho = 0;
-
+    public int qtdcoelho = 0;
+    public int qtdPlanta=0;
     gerenciaLista() {
         this.primeiroCoelho = ultimoCoelho = null;
         this.primeiroOnca = ultimoOnca = null;
@@ -543,12 +543,13 @@ public class gerenciaLista {
 
     public void verificaStatusCoelho() {
         Coelho x = primeiroCoelho;
-        int qtdcoelho = 1;
+        
         while (x != null) {
-            System.out.printf("\n%d COELHO: [%d][%d]",qtdcoelho, x.x, x.y);
             qtdcoelho++;
+            System.out.printf("\n%d COELHO: [%d][%d]",qtdcoelho, x.x, x.y);
             x = x.prox;
         }
+        
         if(ultimoCoelho!=null){
             System.out.printf("\nUltimo COELHO: [%d][%d]",ultimoCoelho.x,ultimoCoelho.y);
         }
@@ -564,7 +565,7 @@ public class gerenciaLista {
             if (x.reproducao == 1) {
                 x.reproducao = 24;
                // repCoelho++;
-                if (nCoelhos + nOncas + nPlantas + 10 < amb.getMatriz().length * amb.getMatriz().length) {
+                if (qtdcoelho + nOncas + qtdPlanta + 10 < amb.getMatriz().length * amb.getMatriz().length) {
                     reproducaoCueio();
                 }
             } else {
@@ -596,7 +597,7 @@ public class gerenciaLista {
             if (x.reproducao == 1) {
 
                     x.reproducao = 48;
-                if (nCoelhos + nOncas + nPlantas + 10 < amb.getMatriz().length * amb.getMatriz().length) {
+                if (qtdcoelho + nOncas + qtdPlanta + 10 < amb.getMatriz().length * amb.getMatriz().length) {
                     reproducaoOnca();
                 }
             } else {
@@ -713,6 +714,12 @@ public class gerenciaLista {
 
     void loading() {
         System.out.println("loading...");
+        Planta tmp = primeiroGrama;
+        while (tmp!=null){
+            qtdPlanta++;
+            tmp=tmp.prox;
+        }
+        
         for (int i = 0; i < nCoelhos + nOncas; i++) {
             System.out.print("|");
         }
