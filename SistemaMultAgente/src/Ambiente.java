@@ -93,7 +93,7 @@ L.amb.imprimiTabuleiro();
             rodadas++;
             
             cont++;
-           if(L.nPlantas < 2270){
+           if(L.nPlantas < 2150){
             reproduzPlantas();
             }
         }
