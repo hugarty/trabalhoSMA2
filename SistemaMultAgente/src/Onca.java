@@ -29,8 +29,8 @@ public class Onca {
    public int reproducao;
    public int x;
    public int y;
-  public  int fome;
-  public  int vida;
+   public  int fome;
+   public  int vida;
    public String animal = "Onça";
     
     public Onca(){
